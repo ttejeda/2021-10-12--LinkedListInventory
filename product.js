@@ -6,6 +6,7 @@ export default class Product{
         this._amount = amount;
         this._cost = cost;
         this._total = total
+        this.next = null;
     }
 
     getCode(){
@@ -26,5 +27,9 @@ export default class Product{
 
     getTotal(){
         return this._total;
+    }
+
+    setNext(next){
+        this.next = next;
     }
 }
