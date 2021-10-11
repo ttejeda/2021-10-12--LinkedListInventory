@@ -51,7 +51,7 @@ export default class Inventory{
 
     _searchByCode(code){
         let temp = this._start;
-        while(!temp){
+        while(temp != null){
             if(temp.getCode() == code){
                 return true;
             }
@@ -64,7 +64,7 @@ export default class Inventory{
 
     searchProductByCode(code){
         let exist = this._searchByCode(code);
-        if(exist == true){
+        if(!exist){
             return null;
         }
 
