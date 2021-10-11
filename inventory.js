@@ -20,7 +20,7 @@ export default class Inventory{
 
         return false;
     }
-
+/*
     _orderProducts(){
         if(this._inventory.length == 1){
             return;
@@ -38,11 +38,11 @@ export default class Inventory{
                 product = a;
             }
         }
-    }
+    }*/
 
     _getLast(){
         let temp = this._start;
-        while(temp.next == null){
+        while(temp.next != null){
             temp = temp.next;
         }
 
@@ -63,14 +63,19 @@ export default class Inventory{
     }
 
     searchProductByCode(code){
-        let pos = this._searchByCode(code);
-        if(pos >= 0){
-            return this._inventory[pos]
+        let exist = this._searchByCode(code);
+        if(exist == true){
+            return null;
         }
 
-        return null;
-    }
+        let temp = this._start;
+        while(temp.getCode() != code){
+            temp = temp.next;
+        }
 
+        return temp;
+    }
+/*
     deleteProductByCode(code){
         let pos = this._searchByCode(code);
         if(pos >= 0){
@@ -128,5 +133,5 @@ export default class Inventory{
             this._inventory[position] = product;
             product = ab;
         }
-    }
+    }*/
 }
