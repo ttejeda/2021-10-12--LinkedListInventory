@@ -1,14 +1,20 @@
 export default class Inventory{
 
     constructor(){
+        this._start = null;
         this._inventory = new Array();
     }
 
     addProduct(product){
-        let pos = this._searchByCode(product.getCode());
-        if(pos == -1){
-            this._inventory.push(product);
-            this._orderProducts();
+        if(this._start == null){
+            this._start = product;
+            return true;
+        }
+
+        let exist = this._searchByCode(product.getCode());
+        if(!exist){
+            let last = this._getLast();
+            last.setNext(product);
             return true;
         }
 
@@ -34,14 +40,26 @@ export default class Inventory{
         }
     }
 
-    _searchByCode(code){
-        for(let i = 0; i < this._inventory.length; i++){
-            if(this._inventory[i].getCode() == code){
-                return i;
-            }
+    _getLast(){
+        let temp = this._start;
+        while(temp.next == null){
+            temp = temp.next;
         }
 
-        return -1;
+        return temp;
+    }
+
+    _searchByCode(code){
+        let temp = this._start;
+        while(!temp){
+            if(temp.getCode() == code){
+                return true;
+            }
+
+            temp = temp.next;
+        }
+
+        return false;
     }
 
     searchProductByCode(code){
