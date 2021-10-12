@@ -77,35 +77,44 @@ export default class Inventory{
     }
 /*
     deleteProductByCode(code){
-        let pos = this._searchByCode(code);
-        if(pos >= 0){
-            let product = this._inventory[pos];
-            for(let i = pos; i < this._inventory.length; i++){
-                if(i == this._inventory.length - 1){
-                    this._inventory[i] = product;
-                    let deleted = this._inventory.pop();
-                    return deleted;
-                }
-                this._inventory[i] = this._inventory[i+1];
+        let exist = this._searchByCode(code);
+        if(!exist){
+            return null;
+        }
+
+        let temp = this._start;
+        let prev = null;
+        if(temp.next == null){
+            this._start = null;
+            return temp;
+        }
+        if(temp.getCode() == code){
+            this._start = temp.next;
+            return temp;
+        }
+
+        while(temp.next != null){
+            if(temp.getCode() != code){
+                prev = temp;
+                temp = temp.next;
             }
         }
 
-        return null;
+        prev.next = temp.next;
+        return temp;
     }
-
+*/
     list(){
-        if((this._inventory.length - 1) >= 0){
-            let list = "<b>Listado de productos: </b>";
-            for(let i = 0; i < this._inventory.length; i++){
-                console.log(this._inventory);
-                list += `<b>${i+1}</b>. Código:${this._inventory[i].getCode()}. Nombre:${this._inventory[i].getName()}. `;
-            }
-            return list;
+        let temp = this._start;
+        let list = "";
+        while(temp != null){
+            list += `Código: <b>${temp.getCode()}</b>, nombre: ${temp.getName()}.`;
+            temp = temp.next;
         }
 
-        return "Inventario vacío.";
+        return list;
     }
-
+/*
     tsil(){
         if((this._inventory.length - 1) >= 0){
             let tsil = "<b>Listado de produtos(inverso): </b>";
