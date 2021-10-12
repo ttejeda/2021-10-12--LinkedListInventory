@@ -75,7 +75,7 @@ export default class Inventory{
 
         return temp;
     }
-/*
+
     deleteProductByCode(code){
         let exist = this._searchByCode(code);
         if(!exist){
@@ -83,29 +83,27 @@ export default class Inventory{
         }
 
         let temp = this._start;
-        let prev = null;
-        if(temp.next == null){
-            this._start = null;
-            return temp;
-        }
         if(temp.getCode() == code){
             this._start = temp.next;
             return temp;
         }
 
-        while(temp.next != null){
-            if(temp.getCode() != code){
-                prev = temp;
-                temp = temp.next;
-            }
+        let prev = null;
+        while(temp.getCode() != code){
+            prev = temp;
+            temp = temp.next;
         }
 
         prev.next = temp.next;
         return temp;
     }
-*/
+
     list(){
         let temp = this._start;
+        if(temp == null){
+            return "Inventario vacío.";
+        }
+        
         let list = "";
         while(temp != null){
             list += `Código: <b>${temp.getCode()}</b>, nombre: ${temp.getName()}.`;
