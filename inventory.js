@@ -95,6 +95,7 @@ export default class Inventory{
         }
 
         prev.next = temp.next;
+        temp.next = null;
         return temp;
     }
 
@@ -103,28 +104,35 @@ export default class Inventory{
         if(temp == null){
             return "Inventario vacío.";
         }
-        
+
+        let i = 1;
         let list = "";
         while(temp != null){
-            list += `Código: <b>${temp.getCode()}</b>, nombre: ${temp.getName()}.`;
+            list += `<i>${i}</i>. Código: <b>${temp.getCode()}</b>, nombre: ${temp.getName()}. `;
             temp = temp.next;
+            i++;
         }
 
         return list;
     }
-/*
+
     tsil(){
-        if((this._inventory.length - 1) >= 0){
-            let tsil = "<b>Listado de produtos(inverso): </b>";
-            for(let i = (this._inventory.length - 1); i >= 0; i--){
-                tsil += `<b>${i+1}</b>. Código:${this._inventory[i].getCode()}. Nombre:${this._inventory[i].getName()}. `;
-            }
-            return tsil;
+        let temp = this._start;
+        if(temp == null){
+            return "Inventario vacío.";
         }
 
-        return "Inventario vacío.";
-    }
+        let i = 1;
+        let tsil = "";
+        while(temp != null){
+            tsil = `<i>${i}</i>. Código: <b>${temp.getCode()}</b>, nombre: ${temp.getName()}. ` + tsil;
+            temp = temp.next;
+            i++;
+        }
 
+        return tsil;
+    }
+/*
     insertProduct(product, position){
         if(this._inventory.length < position){
             return false;
