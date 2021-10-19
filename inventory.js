@@ -2,7 +2,6 @@ export default class Inventory{
 
     constructor(){
         this._start = null;
-        this._inventory = new Array();
     }
 
     addProduct(product){
@@ -20,25 +19,6 @@ export default class Inventory{
 
         return false;
     }
-/*
-    _orderProducts(){
-        if(this._inventory.length == 1){
-            return;
-        }
-        let product = this._inventory[this._inventory.length - 1];
-        let a;
-        for(let i = 0; i < this._inventory.length; i++){
-            if(i == this._inventory.length - 1){
-                this._inventory[i] = product;
-                return;
-            }
-            if(product.getCode() < this._inventory[i].getCode()){
-                a = this._inventory[i];
-                this._inventory[i] = product;
-                product = a;
-            }
-        }
-    }*/
 
     _getLast(){
         let temp = this._start;
