@@ -132,21 +132,28 @@ export default class Inventory{
 
         return tsil;
     }
-/*
+
     insertProduct(product, position){
-        if(this._inventory.length < position){
-            return false;
+        let temp = this._start;
+        if(position == 0){
+            this._start = product;
+            this._start.setNext(temp);
+            return true;
         }
 
-        let ab;
-        for(position; position <= this._inventory.length; position++){
-            if(position == this._inventory.length){
-                this._inventory.push(product);
+        let i = 0;
+        let prev = null;
+        while(i <= position){
+            if(i == position){
+                product.setNext(temp);
+                prev.setNext(product);
                 return true;
             }
-            ab = this._inventory[position];
-            this._inventory[position] = product;
-            product = ab;
+            prev = temp;
+            temp = temp.next;
+            i++;
         }
-    }*/
+        
+        return false;
+    }
 }
